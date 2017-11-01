@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+        <ui:define name="body">
+
+            <h:form>
+
+                <div align="center">
+                    <p:panel header="#{bundle.ViewActionsTitle}" style="margin-left: 20%; margin-right: 20%">
+                        <br />
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.CreateActionsLabel_nameActions}" for="nameActions" />
+                            <p:inputText id="nameActions" value="#{actionsController.selected.nameActions}" title="#{bundle.CreateActionsTitle_nameActions}" />
+                            <h:outputLabel value="#{bundle.CreateActionsLabel_descripcionActions}" for="descripcionActions" />
+                            <p:inputTextarea rows="2" cols="28" id="descripcionActions" value="#{actionsController.selected.descripcionActions}" title="#{bundle.CreateActionsTitle_descripcionActions}" />
+                            <h:outputLabel value="#{bundle.CreateActionsLabel_activeActions}" for="activeActions" />
+                            <p:selectBooleanButton id="idButton" value="#{actionsController.selected.activeActions}" onLabel="Si" offLabel="No" style="width:60px" />
+                        </h:panelGrid>
+                        <br />
+                        <br />
+                    </p:panel>
+                    <br />
+                    <br />
+                    <p:commandButton icon="ui-icon-search" ajax="false" action="#{actionsController.prepareList}" value="#{bundle.CreateActionsShowAllLink}" />
+                    <br />
+                </div>  
+                <p:growl id="growl" showDetail="true" sticky="true" /> 
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

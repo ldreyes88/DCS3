@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:form>
+                <div align="center">
+                    <p:panel header="#{bundle.EditUserTitle}" style="margin-left: 20%; margin-right: 20%">
+                        <br />
+
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.CreateUserLabel_nameUser}" for="nameUser" />
+                            <p:inputText id="nameUser" value="#{userController.selected.nameUser}" title="#{bundle.CreateUserTitle_nameUser}" />
+                            <h:outputLabel value="#{bundle.CreateUserLabel_lastNameUser}" for="lastNameUser" />
+                            <p:inputText id="lastNameUser" value="#{userController.selected.lastNameUser}" title="#{bundle.CreateUserTitle_lastNameUser}" />
+                            <h:outputLabel value="#{bundle.CreateUserLabel_identificationUser}" for="identificationUser" />
+                            <p:inputText id="identificationUser" value="#{userController.selected.identificationUser}" title="#{bundle.CreateUserTitle_identificationUser}" />
+                            <h:outputLabel value="#{bundle.CreateUserLabel_emailUser}" for="emailUser" />
+                            <p:inputText id="emailUser" value="#{userController.selected.emailUser}" title="#{bundle.CreateUserTitle_emailUser}" />
+                            <h:outputLabel value="#{bundle.CreateUserLabel_celularUser}" for="celularUser" />
+                            <p:inputText id="celularUser" value="#{userController.selected.celularUser}" title="#{bundle.CreateUserTitle_celularUser}" />
+                            <h:outputLabel value="#{bundle.CreateUserLabel_activeUser}" for="activeUser" />
+                            <p:selectBooleanButton id="activeUser" value="#{userController.selected.activeUser}" onLabel="Si" offLabel="No" style="width:60px"  />
+                            <h:outputLabel value="#{bundle.CreateUserLabel_passwordUser}" for="passwordUser" />
+                            <p:password id="passwordUser" label="passwordUser" value="#{userController.selected.passwordUser}" 
+                                        title="#{bundle.CreateUserTitle_passwordUser}" feedback="true"
+                                        promptLabel="Longitud Inaceptable" weakLabel="Seguridad Baja"
+                                        goodLabel="Seguridad Buena" strongLabel="Excelente Seguridad" inline="true"
+                                        redisplay="true"/>
+                            <h:outputLabel value="#{bundle.CreateUserLabel_idRolUser}" for="idRolUser" />
+                            <p:selectOneMenu id="idRolUser" value="#{userController.selected.idRolUser}" filter="true" >
+                                <f:selectItems value="#{userController.listRoles}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+                    <br/>
+                    <p:spacer height="10" />
+                    <p:commandButton icon="ui-icon-disk" ajax="false" action="#{userController.update}" value="#{bundle.EditUserSaveLink}" update="growl"  />
+                    <br />
+                    <br />
+                    <p:commandButton icon="ui-icon-search" ajax="false" action="#{userController.prepareList}" value="#{bundle.EditUserShowAllLink}" />
+                    <br />
+                    <br />
+                </div>
+                <p:growl id="growl" showDetail="true" sticky="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

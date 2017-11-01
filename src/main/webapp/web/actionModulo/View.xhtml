@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+        <ui:define name="body">
+
+            <h:form>
+
+                <div align="center">
+                    <p:panel header="#{bundle.ViewActionModulo_ModuloTitle}" style="margin-left: 20%; margin-right: 20%">
+                        <br />
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.CreateModuloMenuLabel_nameModuloMenu}" for="nameModuloMenu" />
+                            <h:outputLabel id="nameModuloMenu" value="#{moduloMenuController.selected.nameModulo}" title="#{bundle.CreateModuloMenuTitle_nameModuloMenu}" />
+                        </h:panelGrid>
+                        <br />
+                    </p:panel>
+                    <br />
+                    <p:panel header="#{bundle.ViewActionModuloTitle}" style="margin-left: 20%; margin-right: 20%" >
+                        <br />
+                        <h:form id="actionmodule">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="#{bundle.CreateActionModuloLabel_nameActionModulo}"  />
+                                <p:inputText value="#{moduloMenuController.currentAction.nombreAction}" title="#{bundle.CreateActionModuloLabel_nameActionModulo}" />
+                                <h:outputLabel value="#{bundle.CreateActionModuloLabel_urlActionModulo}" />
+                                <p:inputText  value="#{moduloMenuController.currentAction.urlAction}" title="#{bundle.CreateActionModuloLabel_urlActionModulo}" />
+                                <h:outputLabel value="#{bundle.CreateActionModuloLabel_descActionModulo}"  />
+                                <p:inputText  value="#{moduloMenuController.currentAction.descAction}" title="#{bundle.CreateActionModuloLabel_descActionModulo}" />
+                            </h:panelGrid>
+                            <br />
+                            <p:commandButton icon="ui-icon-disk" ajax="false" action="#{moduloMenuController.createActionMenu}" value="#{bundle.CreateModuloMenuSaveLink}" update="growl"  />
+                            <p:growl id="growl" showDetail="true" sticky="true" /> 
+                        </h:form>
+                    </p:panel>
+                    <br/>
+                    <p:panel header="#{bundle.ViewActionModuloRelacionadosTitle}" style="margin-left: 20%; margin-right: 20%" >
+                        <p:dataTable value="#{moduloMenuController.listActionModulo}" var="item" 
+                                     rows="5" editable="true" editMode="cell"
+                                     paginator="true" widgetVar="actionsTable"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListActionsTitle_idActions}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idActionModulo}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListActionsTitle_nameActions}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombreAction}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListActionsTitle_descripcionActions}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descAction}"/>
+                            </p:column>           
+
+                        </p:dataTable>
+                    </p:panel>    
+                    <br />
+                    <br />
+                    <br />
+                    <p:commandButton icon="ui-icon-search" ajax="false" action="#{moduloMenuController.prepareList}" value="#{bundle.ViewModuloMenuShowAllLink}" />
+                    <br />
+                </div>  
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

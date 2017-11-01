@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+
+        <ui:define name="body">
+
+
+            <h:form>
+                <div align="center">
+                    <p:panel header="#{bundle.EditRolUserTitle}" style="margin-left: 20%; margin-right: 20%">
+                        <br /> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.CreateRolUserLabel_nameRolUser}" for="nameRolUser" />
+                            <p:inputText id="nameRolUser" value="#{rolUserController.selected.nameRolUser}" title="#{bundle.CreateRolUserTitle_nameRolUser}" required="true" requiredMessage="El nombre del Rol es requerido" />
+                            <h:outputLabel value="#{bundle.CreateRolUserLabel_descriptionUser}" for="descriptionUser" />
+                            <p:inputTextarea rows="2" cols="24" id="descriptionUser" value="#{rolUserController.selected.descriptionUser}" title="#{bundle.CreateRolUserTitle_descriptionUser}" />
+                        </h:panelGrid>
+
+                    </p:panel>
+                    <br /> 
+                    <p:commandButton icon="ui-icon-disk" ajax="false" action="#{rolUserController.update}" value="#{bundle.EditRolUserSaveLink}" update="growl"  />
+                    <br />
+                    <br />
+                    <p:commandButton icon="ui-icon-search" process="@this" action="#{rolUserController.prepareList}" value="#{bundle.CreateRolUserShowAllLink}" />
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

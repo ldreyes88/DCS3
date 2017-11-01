@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form >
+                <p:dataTable value="#{userController.listUser}"  
+                             var="item" rows="10"
+                             paginator="true" widgetVar="strategyTable"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+
+                    <f:facet name="header" >
+                        <p:outputPanel style="float: right">
+                            <h:outputText value="Buscar:" />
+                            <p:inputText id="globalFilter" onkeyup="PF('strategyTable').filter()" style="width:150px" placeholder="Pulsa Enter"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column filterBy="#{item.nameUser}" footerText="contains" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_nameUser}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nameUser}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.lastNameUser}" footerText="contains" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_lastNameUser}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.lastNameUser}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.identificationUser}" footerText="contains" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_identificationUser}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.identificationUser}"/>
+                    </p:column>                    
+
+                    <p:column filterBy="#{item.emailUser}" footerText="contains" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_emailUser}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.emailUser}"/>
+                    </p:column>   
+
+                    <p:column filterBy="#{item.idRolUser.nameRolUser}" footerText="contains" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_idRolUser}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idRolUser.nameRolUser}"/>
+                    </p:column>   
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <p:commandButton icon="ui-icon-search"  ajax="false" action="#{userController.prepareView}" title="#{bundle.ListUserViewLink}">
+                            <f:setPropertyActionListener target="#{userController.current}" value="#{item}" />
+                        </p:commandButton> 
+                        
+                        <h:outputText value=" "/>
+                        <p:commandButton icon="ui-icon-pencil" ajax="false" action="#{userController.prepareEdit}" title="#{bundle.ListUserEditLink}">
+                            <f:setPropertyActionListener target="#{userController.current}" value="#{item}" />
+                        </p:commandButton>
+
+                         <h:outputText value=" "/>
+                        <p:commandButton icon="ui-icon-closethick" ajax="false" action="#{userController.destroy}" title="#{bundle.ListUserDestroyLink}">
+                            <f:setPropertyActionListener target="#{userController.current}" value="#{item}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <br />
+                <p:commandButton icon="ui-icon-plus" ajax="false" action="#{userController.prepareCreate}" value="#{bundle.ListUserCreateLink}"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

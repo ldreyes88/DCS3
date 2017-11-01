@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+    <h:head>
+        <title>Login - DCS+</title>
+        <h:outputStylesheet library="login-form" name="style.css"  /> 
+    </h:head>
+    <body>
+
+        <span href="#" class="button" id="toggle-login">Log in</span>
+
+        <div id="login">
+            <div id="triangle"></div>
+            <h1>Iniciar Sesion</h1>
+            <h:form>
+                <h:inputText class="input" id="Identificacion" value="#{loginManageBean.identificacion}"  label="Identificacion" />
+                <h:inputSecret class="input" id="password" value="#{loginManageBean.passWords}" label="Password" />
+
+                <h:commandButton class="iniciar" action="#{loginManageBean.consultarSesion}" value="Login" />
+
+                <p:growl id="growl" showDetail="true" sticky="true" /> 
+            </h:form>
+        </div>
+        <h:outputScript library="login-form" name="index.js" />
+    </body>
+</html>

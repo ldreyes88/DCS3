@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    <application>
+      
+        <resource-bundle>
+            <base-name>objects.Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        
+        <navigation-handler>
+            org.primefaces.mobile.application.MobileNavigationHandler
+        </navigation-handler>
+    </application>
+    <!-- REGLAS DE NAVEGACION-->
+    <!-- Permite iniciar Login -->
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>loggedIn</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>   
+    <!-- Permite salir de Login -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>loggedOut</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule> 
+    <!--Navegación de Aplicación-->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <!-- Navegacion de Modulo Entidad -->
+        <!-- * Listar Entidades * -->
+        <navigation-case>
+            <from-outcome>ListEntity</from-outcome>
+            <to-view-id>/web/entity/List.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Crear Entidad * -->
+        <navigation-case>
+            <from-outcome>CreateEntity</from-outcome>
+            <to-view-id>/web/entity/Create.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Editar Entidad * -->
+        <navigation-case>
+            <from-outcome>EditEntity</from-outcome>
+            <to-view-id>/web/entity/Edit.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Ver Entidad * -->
+        <navigation-case>
+            <from-outcome>ViewEntity</from-outcome>
+            <to-view-id>/web/entity/View.xhtml</to-view-id>
+        </navigation-case>
+        
+        <!-- Navegacion de Modulo Estrategia -->
+        <!-- * Listar Estrategias * -->
+        <navigation-case>
+            <from-outcome>ListStrategy</from-outcome>
+            <to-view-id>/web/strategy/List.xhtml</to-view-id>
+        </navigation-case> 
+        <!-- * Crear Estrategia * -->
+        <navigation-case>
+            <from-outcome>CreateStrategy</from-outcome>
+            <to-view-id>/web/strategy/Create.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Editar Estrategia * -->
+        <navigation-case>
+            <from-outcome>EditStrategy</from-outcome>
+            <to-view-id>/web/strategy/Edit.xhtml</to-view-id>
+        </navigation-case>   
+        <!-- * Ver Estrategia * -->
+        <navigation-case>
+            <from-outcome>ViewStrategy</from-outcome>
+            <to-view-id>/web/strategy/View.xhtml</to-view-id>
+        </navigation-case> 
+        
+        <!-- Navegacion de Modulo Procesos -->
+        <!-- * Listar Procesos * --> 
+        <navigation-case>
+            <from-outcome>ListMasterActions</from-outcome>
+            <to-view-id>/web/masterActions/List.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Crear Proceso * --> 
+        <navigation-case>
+            <from-outcome>CreateMasterActions</from-outcome>
+            <to-view-id>/web/masterActions/Create.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Editar Proceso * --> 
+        <navigation-case>
+            <from-outcome>EditMasterActions</from-outcome>
+            <to-view-id>/web/masterActions/Edit.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Ver Proceso * --> 
+        <navigation-case>
+            <from-outcome>ViewMasterActions</from-outcome>
+            <to-view-id>/web/masterActions/View.xhtml</to-view-id>
+        </navigation-case>
+        
+        <!-- Navegacion de Modulo Usuarios -->
+        <!-- * Listar Usuarios * --> 
+        <navigation-case>
+            <from-outcome>ListUser</from-outcome>
+            <to-view-id>/web/user/List.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Crear Usuario * --> 
+        <navigation-case>
+            <from-outcome>CreateUser</from-outcome>
+            <to-view-id>/web/user/Create.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Editar Usuario * --> 
+        <navigation-case>
+            <from-outcome>EditUser</from-outcome>
+            <to-view-id>/web/user/Edit.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Ver Usuario * --> 
+        <navigation-case>
+            <from-outcome>ViewUser</from-outcome>
+            <to-view-id>/web/user/View.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Actualizar Perfil * --> 
+        <navigation-case>
+            <from-outcome>UpdateProfile</from-outcome>
+            <to-view-id>/web/user/UpdatePerfil.xhtml</to-view-id>
+        </navigation-case>
+        
+        <!-- Navegacion de Modulo Roles -->
+        <!-- * Listar Roles * --> 
+        <navigation-case>
+            <from-outcome>ListRoles</from-outcome>
+            <to-view-id>/web/rolUser/List.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Crear Roles * --> 
+        <navigation-case>
+            <from-outcome>CreateRol</from-outcome>
+            <to-view-id>/web/rolUser/Create.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Editar Roles * --> 
+        <navigation-case>
+            <from-outcome>EditRol</from-outcome>
+            <to-view-id>/web/rolUser/Edit.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Ver Roles * --> 
+        <navigation-case>
+            <from-outcome>ViewRol</from-outcome>
+            <to-view-id>/web/rolUser/View.xhtml</to-view-id>
+        </navigation-case>        
+        
+        <!-- Navegacion de Modulo Acciones -->
+        <!-- * Listar Acciones * --> 
+        <navigation-case>
+            <from-outcome>ListAcciones</from-outcome>
+            <to-view-id>/web/actions/List.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Crear Acción * --> 
+        <navigation-case>
+            <from-outcome>CreateAccion</from-outcome>
+            <to-view-id>/web/actions/Create.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Editar Acción * --> 
+        <navigation-case>
+            <from-outcome>EditAccion</from-outcome>
+            <to-view-id>/web/actions/Edit.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Ver Acción * --> 
+        <navigation-case>
+            <from-outcome>ViewAccion</from-outcome>
+            <to-view-id>/web/actions/View.xhtml</to-view-id>
+        </navigation-case>
+      
+        <!-- Navegacion de Modulo_Menu -->
+        <!-- * Listar Modulo_Menu * --> 
+        <navigation-case>
+            <from-outcome>ListModuloMenu</from-outcome>
+            <to-view-id>/web/moduloMenu/List.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Crear Modulo_Menu * --> 
+        <navigation-case>
+            <from-outcome>CrateModuloMenu</from-outcome>
+            <to-view-id>/web/moduloMenu/Create.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Editar Modulo_Menu * --> 
+        <navigation-case>
+            <from-outcome>EditModuloMenu</from-outcome>
+            <to-view-id>/web/moduloMenu/Edit.xhtml</to-view-id>
+        </navigation-case>
+        <!-- * Ver Modulo_Menu * --> 
+        <navigation-case>
+            <from-outcome>ViewModuloMenu</from-outcome>
+            <to-view-id>/web/moduloMenu/View.xhtml</to-view-id>
+        </navigation-case>
+        
+        
+        <!-- Navegacion de ActionModulo -->
+        <!-- * Listar ActionModulo * --> 
+        <navigation-case>
+            <from-outcome>CreateActionModulo</from-outcome>
+            <to-view-id>/web/actionModulo/View.xhtml</to-view-id>
+        </navigation-case>
+      
+    </navigation-rule>   
+
+</faces-config>

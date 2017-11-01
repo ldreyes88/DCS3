@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+        </ui:define>
+
+        <ui:define name="body" >   
+
+            <h:form>
+                <div align="center">
+
+                    <p:panel header="#{bundle.CreateEntityTitle}" style="margin-left: 20%; margin-right: 20%">
+
+                        <br />
+
+                        <h:panelGrid columns="2"  >
+
+                            <h:outputLabel value="#{bundle.CreateEntityLabel_nameEntity}" for="nameEntity" />
+                            <p:inputText id="nameEntity" value="#{entityController.selected.nameEntity}" title="#{bundle.CreateEntityTitle_nameEntity}" />
+                            <h:outputLabel value="#{bundle.CreateEntityLabel_nitEntity}" for="nitEntity" />
+                            <p:inputText id="nitEntity" value="#{entityController.selected.nitEntity}" title="#{bundle.CreateEntityTitle_nitEntity}" />
+                            <h:outputLabel value="#{bundle.CreateEntityLabel_numberSuscriptorEntity}" for="numberSuscriptorEntity" />
+                            <p:inputText id="numberSuscriptorEntity" value="#{entityController.selected.numberSuscriptorEntity}" title="#{bundle.CreateEntityTitle_numberSuscriptorEntity}" />
+                            <h:outputLabel id="idUserLabel" value="ID Usuario:" />
+                            <p:inputText id="idUserEntity" value="#{entityController.selected.idUser}" title="Id Usuario Decisor" />
+                            <h:outputLabel value="#{bundle.CreateEntityLabel_descripcionEntity}" for="descripcionEntity" />
+                            <p:inputTextarea rows="2" cols="34" styleClass="selectOneMenu" id="descripcionEntity" value="#{entityController.selected.descripcionEntity}" title="#{bundle.CreateEntityTitle_descripcionEntity}" />
+
+                        </h:panelGrid>
+
+                        <br />
+
+                    </p:panel>
+                    <br />
+                    <p:commandButton id="IdButtonSave" icon="ui-icon-disk" ajax="false" action="#{entityController.create}" value="#{bundle.CreateEntitySaveLink}" update="growl"  />
+
+                    <br />
+                    <br />
+                    <p:commandButton id="IdButtonVolver" icon="ui-icon-search" ajax="false" action="#{entityController.prepareList}" value="#{bundle.CreateEntityShowAllLink}" />
+                    <br />
+                    <br />
+
+                </div>
+
+                <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

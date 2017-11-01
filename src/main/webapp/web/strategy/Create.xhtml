@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+        <ui:define name="body">
+            <h:form>
+                <div align="center">
+
+                    <p:panel header="#{bundle.CreateStrategyTitle}" style="margin-left: 20%; margin-right: 20%">
+
+                        <br />
+
+                        
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="#{bundle.CreateStrategyLabel_nameStrategy}" for="nameStrategy" />
+                            <p:inputText id="nameStrategy" value="#{strategyController.selected.nameStrategy}" title="#{bundle.CreateStrategyTitle_nameStrategy}" required="true" requiredMessage="Se debe escribir un nombre" >
+                                <p:ajax event="keyup" update="out" listener="#{strategyController.findNameDB(strategyController.selected.nameStrategy)}" />
+                            </p:inputText>
+                            <h:outputText  id="out" value="#{strategyController.msjNameStrategy}" style="color: #{strategyController.msjTipo}" class="align-left"/>
+   
+                            <h:outputLabel value="#{bundle.CreateStrategyLabel_codigoStrategy}" for="codigoStrategy" />            
+                            <p:inputText id="codigoStrategy" value="#{strategyController.selected.codigoStrategy}" title="#{bundle.CreateStrategyTitle_codigoStrategy}" />
+                            <h:outputText value="" style="color: white" />
+                            
+                            <h:outputLabel value="#{bundle.CreateStrategyLabel_descripcionStrategy}" for="descripcionStrategy" />
+                            <p:inputTextarea  rows="2" cols="30" id="descripcionStrategy" value="#{strategyController.selected.descripcionStrategy}" title="#{bundle.CreateStrategyTitle_descripcionStrategy}" />
+                            <h:outputText value="" style="color: white" />
+                            
+                            <h:outputLabel value="#{bundle.CreateStrategyLabel_activeStrategy}" for="activeStrategy" />
+                            <p:selectBooleanButton id="idButton" value="#{strategyController.selected.activeStrategy}" onLabel="Si" offLabel="No" style="width:60px" />
+                            <h:outputText value="" style="color: white" />
+                            
+                            <h:outputLabel value="#{bundle.CreateStrategyLabel_idEntity}" />
+                             <p:selectOneMenu id="idEntity" value="#{strategyController.selected.idEntity}" filter="true" filterMatchMode="startsWith" >
+                                <f:selectItems value="#{strategyController.listEntitys}" var="entity" itemLabel="#{entity.nameEntity}" itemValue="#{entity}"   />
+                            </p:selectOneMenu>
+                            <h:outputText value="" style="color: white" />
+                            
+                        </h:panelGrid>
+
+                        <br />
+                        <p:messages id="msg" />
+                    </p:panel>
+                    <br />
+                    <p:commandButton icon="ui-icon-disk" rendered="#{strategyController.visibleButtonSaveConsecutivo==false}" ajax="false" action="#{strategyController.create}" value="#{bundle.CreateStrategySaveLink}" update="growl"  />
+                    <p:commandButton icon="ui-icon-disk" rendered="#{strategyController.visibleButtonSaveConsecutivo==true}" ajax="false" action="#{strategyController.createWithConsecutive}" value="#{bundle.CreateStrategySaveConsecutivoLink}" update="growl"  />
+                    <br />
+                    <br />
+                    <p:commandButton icon="ui-icon-search" ajax="false" action="#{strategyController.prepareList}" value="#{bundle.CreateStrategyShowAllLink}" />
+                    <br />
+                    <br />
+
+                </div>
+
+                <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

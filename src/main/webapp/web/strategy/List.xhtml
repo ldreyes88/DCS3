@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+        <ui:define name="body">
+
+            <h:form>
+                <div align="center" >
+                    <h:panelGrid columns="2" >
+                        <p:commandButton icon="ui-icon-plus" ajax="false" action="#{strategyController.prepareCreate}" value="#{bundle.ListStrategyCreateLink}"/>
+                        <p:commandButton icon="ui-icon-plus" ajax="false" action="#{strategyController.prepareCreateWithConsecutive}" value="#{bundle.ListStrategyCreateConsecutiveLink}"/>
+                    </h:panelGrid>
+                </div>
+                <br />
+                <p:dataTable value="#{strategyController.listStrategy}" 
+                             var="item" rows="15" paginator="true" widgetVar="strategyTable" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             selection="#{strategyController.current}" rowKey="#{item}" rowsPerPageTemplate="5,10,15"
+                             >
+
+                    <f:facet name="header" >
+                        <p:outputPanel style="float: right">
+                            <h:outputText value="Buscar:" />
+                            <p:inputText id="globalFilter" onkeyup="PF('strategyTable').filter()" style="width:150px" placeholder="Pulsa Enter"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column filterBy="#{item.codigoStrategy}" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStrategyTitle_codigoStrategy}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoStrategy}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.nameStrategy}" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStrategyTitle_nameStrategy}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nameStrategy}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.idEntity.nameEntity}" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListStrategyTitle_idEntity}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idEntity.nameEntity}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <p:commandButton icon="ui-icon-search"  ajax="false" action="#{strategyController.prepareView}" title="#{bundle.ListStrategyViewLink}"> 
+                            <f:setPropertyActionListener target="#{strategyController.current}" value="#{item}" />
+                        </p:commandButton>
+                        <h:outputText value=" "/>
+                        <p:commandButton icon="ui-icon-pencil" ajax="false" action="#{strategyController.prepareEdit}" title="#{bundle.ListStrategyEditLink}">
+                            <f:setPropertyActionListener target="#{strategyController.current}" value="#{item}" />
+                        </p:commandButton>
+                        <h:outputText value=" "/>
+                        <p:commandButton icon="ui-icon-closethick" ajax="false" action="#{strategyController.destroy}" title="#{bundle.ListStrategyDestroyLink}">
+                            <f:setPropertyActionListener target="#{strategyController.current}" value="#{item}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

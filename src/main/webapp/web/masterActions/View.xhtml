@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:form>
+                <div align="center">
+                    <p:panel header="#{bundle.ViewMasterActionsTitle}" style="margin-left: 20%; margin-right: 20%">
+                        <br />
+                        <h:panelGrid columns="4">
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_descripcionMasterActions}" for="descripcionMasterActions" />
+                            <p:inputTextarea  rows="2" cols="26" id="descripcionMasterActions" value="#{masterActionsController.selected.descripcionMasterActions}" title="#{bundle.CreateMasterActionsTitle_descripcionMasterActions}" />
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_userActions}"  />
+                            <p:inputText id="userActions" value="#{masterActionsController.selected.userActions.nameUser}" disabled="true" />
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_timeActions}" for="timeActions" />
+                            <p:calendar id="timeActions" value="#{masterActionsController.selected.timeActions}" title="#{bundle.CreateMasterActionsTitle_timeActions}" readonly="true" >
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </p:calendar>
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_stateActions}" for="stateActions" />
+                            <p:selectBooleanButton id="stateActions" value="#{masterActionsController.selected.finishActions}" onLabel="Si" offLabel="No" style="width:60px"/>
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_idActions}" for="idActions" />
+                            <p:inputText id="idActions" value="#{masterActionsController.selected.idActions.nameActions}"  />
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_idStrategy}" for="idStrategy" />
+                            <p:inputText id="idStrategy" value="#{masterActionsController.selected.idStrategy.nameStrategy}" />
+                        </h:panelGrid>
+                        <br />
+                    </p:panel>
+                </div>
+                <br />
+                <br />
+                <p:commandButton icon="ui-icon-search" ajax="false" action="#{masterActionsController.prepareList}" value="#{bundle.CreateMasterActionsShowAllLink}" />
+                <br />
+                <p:growl id="growl" showDetail="true" sticky="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

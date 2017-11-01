@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+        
+        <ui:define name="body">
+            <h:form>
+                <p:dataTable value="#{actionsController.listActions}" var="item" 
+                              rows="5"
+                             paginator="true" widgetVar="actionsTable"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActionsTitle_idActions}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idActions}"/>
+                        </p:column>
+                        
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActionsTitle_nameActions}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nameActions}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActionsTitle_descripcionActions}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionActions}"/>
+                        </p:column>           
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:commandButton icon="ui-icon-search"  ajax="false" action="#{actionsController.prepareView}" title="#{bundle.ListActionsViewLink}">
+                                <f:setPropertyActionListener target="#{actionsController.current}" value="#{item}" /> 
+                            </p:commandButton>
+                            <h:outputText value=" "/>
+                            <p:commandButton icon="ui-icon-pencil" ajax="false" action="#{actionsController.prepareEdit}" title="#{bundle.ListActionsEditLink}">
+                                <f:setPropertyActionListener target="#{actionsController.current}" value="#{item}" />
+                            </p:commandButton>
+                            <h:outputText value=" "/>
+                            <p:commandButton icon="ui-icon-closethick" ajax="false" action="#{actionsController.destroy}" title="#{bundle.ListActionsDestroyLink}">
+                                <f:setPropertyActionListener target="#{actionsController.current}" value="#{item}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                <br />
+                <p:commandButton icon="ui-icon-plus" process="@this" action="#{actionsController.prepareCreate}" value="#{bundle.ListActionsCreateLink}"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

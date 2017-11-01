@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="body">
+            <h:form >
+                <div align="center">
+                    <p:commandButton icon="ui-icon-plus" ajax="false" action="#{entityController.prepareCreate}" value="#{bundle.ListEntityCreateLink}"/>
+                </div>
+                <br />
+                <p:dataTable id="datetable" value="#{entityController.listEntity}" 
+                             var="item" rows="15"
+                             paginator="true" widgetVar="entitysTable"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             selection="#{entityController.current}" rowKey="#{item}"
+                              >
+
+                    <f:facet name="header" >
+                        <p:outputPanel style="float: right">
+                            <h:outputText value="Buscar:" />
+                            <p:inputText id="globalFilter" onkeyup="PF('entitysTable').filter()" style="width:150px" placeholder="Pulsa Enter"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column filterBy="#{item.nameEntity}" footerText="contains" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListEntityTitle_nameEntity}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nameEntity}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.nitEntity}" footerText="contains" filterMatchMode="contains" filterStyle="display: none" >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListEntityTitle_nitEntity}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nitEntity}"/>
+                    </p:column>
+                    <p:column width="20%">
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <p:commandButton icon="ui-icon-search"  ajax="false" action="#{entityController.prepareView}" title="#{bundle.ListEntityViewLink}">
+                            <f:setPropertyActionListener target="#{entityController.current}" value="#{item}" />
+                        </p:commandButton>                        
+                        <h:outputText value=" "/>
+                        <p:commandButton icon="ui-icon-pencil" ajax="false" action="#{entityController.prepareEdit}" title="#{bundle.ListEntityEditLink}">
+                            <f:setPropertyActionListener target="#{entityController.current}" value="#{item}" />
+                        </p:commandButton>
+                        <h:outputText value=" "/>
+                        <p:commandButton icon="ui-icon-closethick" ajax="false" action="#{entityController.destroy}" title="#{bundle.ListEntityDestroyLink}">
+                            <f:setPropertyActionListener target="#{entityController.current}" value="#{item}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

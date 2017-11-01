@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+        </ui:define>
+        <ui:define name="body">
+
+            <h:form>
+                <div align="center">
+
+                    <p:panel header="#{bundle.CreateMasterActionsTitle}" style="margin-left: 1%; margin-right: 1%">
+
+                        <br />
+
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_idActions}" for="idActions" />
+                            <p:selectOneMenu id="idActions" value="#{masterActionsController.selected.idActions}"  >
+                                <f:selectItems value="#{masterActionsController.listActions}" var="item" itemLabel="#{item.nameActions}" />
+                            </p:selectOneMenu>
+                            
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_descripcionMasterActions}" for="descripcionMasterActions" />
+                            <p:inputTextarea  rows="2" cols="26" id="descripcionMasterActions" value="#{masterActionsController.selected.descripcionMasterActions}" title="#{bundle.CreateMasterActionsTitle_descripcionMasterActions}" />
+                            
+
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_idStrategy}" for="idStrategy" />
+                            <p:autoComplete value="#{masterActionsController.selected.idStrategy}" completeMethod="#{masterActionsController.prepareListStrategyAutocomplete}" forceSelection="true"
+                                            var="estrategia" itemLabel="#{estrategia.nameStrategy} - #{estrategia.idEntity}" itemValue="#{estrategia}" size="40">                                
+                            </p:autoComplete>
+
+                            
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_timeActions}"  />
+                            <p:calendar id="timeActions" value="#{masterActionsController.selected.timeActions}" title="#{bundle.CreateMasterActionsTitle_timeActions}" locale="es" pattern="yyyy/MM/dd HH:mm:s" >
+                                <f:convertDateTime pattern="yyyy/MM/dd HH:mm:ss" />
+                            </p:calendar>
+                            
+                            <h:outputLabel value="#{bundle.CreateMasterActionsLabel_stateActions}"  />
+                            <p:selectBooleanButton id="finishActions" value="#{masterActionsController.selected.finishActions}" onLabel="Si" offLabel="No" style="width:60px"/>
+                            
+                            <h:outputLabel value="#{bundle.ListMasterActionsTitle_StateMaster}" for="stateActions" />
+                            <p:selectOneMenu id="stateActions" value="#{masterActionsController.selected.stateActions}"  >
+                                <f:selectItem itemLabel="N/A" itemValue="0" />
+                                <f:selectItem itemLabel="GENERACION_CODIGO" itemValue="1"  />
+                                <f:selectItem itemLabel="DESARROLLO" itemValue="2" />
+                                <f:selectItem itemLabel="ENTREGADO_PI" itemValue="3" />
+                                <f:selectItem itemLabel="PRUEBAS_PI" itemValue="4" />
+                                <f:selectItem itemLabel="ENTREGADO_DEMO" itemValue="5" />
+                                <f:selectItem itemLabel="PRUEBAS_DEMO" itemValue="6" />
+                            </p:selectOneMenu>
+
+                        </h:panelGrid>
+                        <br />
+                    </p:panel>
+                    <p:growl id="msgs" showDetail="true" />
+                </div>
+
+                <br />
+                <p:commandButton icon="ui-icon-disk" ajax="false" action="#{masterActionsController.create}" value="#{bundle.CreateMasterActionsSaveLink}" update="growl"  />
+                <br />
+                <br />
+                <p:commandButton icon="ui-icon-search" immediate="true" action="#{masterActionsController.prepareList}" value="#{bundle.CreateMasterActionsShowAllLink}" />
+                <br />
+                <br />
+                <p:growl id="growl" showDetail="true" sticky="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+
+</html>

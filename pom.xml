@@ -75,7 +75,7 @@
 			<version>3.16</version>
 		</dependency>
 
-
+		<!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
@@ -93,10 +93,10 @@
 		</repository>
 	</repositories>
 
+	<!-- Crear artefacto con el nombre del proyecto -->
 	<build>
 		<finalName>${project.artifactId}</finalName>
 	</build>
-
 
 
 </project>

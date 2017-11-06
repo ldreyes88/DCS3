@@ -102,6 +102,7 @@ public class MasterActionsController implements Serializable {
         current.setUserActions(loginManageBean.getUserLogin());
         getCurrent().setTimeActions(ModeloUtilidades.getInstance().getFechaActual());
         consultarActions();
+        consultarUser();
         
         return "CreateMasterActions";
     }

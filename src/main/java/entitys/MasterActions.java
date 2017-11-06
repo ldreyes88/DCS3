@@ -55,6 +55,18 @@ public class MasterActions implements Serializable {
     private Integer stateActions;
     @Column(name = "FINISH_ACTIONS")
     private Boolean finishActions;
+    @Column(name = "VISUALIZACION")
+    private Boolean visualizacion;
+    @Column(name = "COMPILACION")
+    private Boolean compilacion;
+    @Column(name = "PRUEBA_WEB")
+    private Boolean pruebaWeb;
+    @Column(name = "PRUEBA_LOTE")
+    private Boolean pruebaLote;
+    @Column(name = "COMPLEJIDAD")
+    private Integer complejidad;
+    @Column(name = "PROVEEDOR")
+    private Integer proveedor;
     @JoinColumn(name = "ID_STRATEGY", referencedColumnName = "ID_STRATEGY")
     @ManyToOne(fetch = FetchType.EAGER)
     private Strategy idStrategy;
@@ -135,7 +147,8 @@ public class MasterActions implements Serializable {
     public void setIdActions(Actions idActions) {
         this.idActions = idActions;
     }
-
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -160,5 +173,53 @@ public class MasterActions implements Serializable {
     public String toString() {
         return "Entitys.MasterActions[ idMasterActions=" + idMasterActions + " ]";
     }
+
+	public Boolean getVisualizacion() {
+		return visualizacion;
+	}
+
+	public void setVisualizacion(Boolean visualizacion) {
+		this.visualizacion = visualizacion;
+	}
+
+	public Boolean getCompilacion() {
+		return compilacion;
+	}
+
+	public void setCompilacion(Boolean compilacion) {
+		this.compilacion = compilacion;
+	}
+
+	public Boolean getPruebaWeb() {
+		return pruebaWeb;
+	}
+
+	public void setPruebaWeb(Boolean pruebaWeb) {
+		this.pruebaWeb = pruebaWeb;
+	}
+
+	public Boolean getPruebaLote() {
+		return pruebaLote;
+	}
+
+	public void setPruebaLote(Boolean pruebaLote) {
+		this.pruebaLote = pruebaLote;
+	}
+
+	public Integer getComplejidad() {
+		return complejidad;
+	}
+
+	public void setComplejidad(Integer complejidad) {
+		this.complejidad = complejidad;
+	}
+
+	public Integer getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Integer proveedor) {
+		this.proveedor = proveedor;
+	}
     
 }

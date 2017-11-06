@@ -20,21 +20,20 @@
 					<br />
 
 					<h:panelGrid columns="4">
+
+						<h:outputLabel value="Seleccione Usuario" for="idUsuarios" />
+						<p:selectOneMenu id="idUser"
+							value="#{masterActionsController.selected.userActions}">
+							<f:selectItems value="#{masterActionsController.listUsers}"
+								var="item" itemLabel="#{item.nameUser}" />
+						</p:selectOneMenu>
+
 						<h:outputLabel
 							value="#{bundle.CreateMasterActionsLabel_descripcionMasterActions}"
 							for="descripcionMasterActions" />
 						<p:inputTextarea rows="2" cols="26" id="descripcionMasterActions"
 							value="#{masterActionsController.selected.descripcionMasterActions}"
 							title="#{bundle.CreateMasterActionsTitle_descripcionMasterActions}" />
-
-						<h:outputLabel
-							value="#{bundle.CreateMasterActionsLabel_userActions}" />
-						<p:selectOneMenu id="userActions"
-							value="#{masterActionsController.selected.userActions}"
-							disabled="true">
-							<f:selectItems value="#{masterActionsController.listUsers}"
-								var="item" itemLabel="#{item.nameUser}" />
-						</p:selectOneMenu>
 
 						<h:outputLabel
 							value="#{bundle.CreateMasterActionsLabel_timeActions}"
@@ -53,18 +52,60 @@
 							value="#{masterActionsController.selected.finishActions}"
 							onLabel="Si" offLabel="No" style="width:60px" />
 
+
+						<h:outputLabel value="Compilacion" />
+						<p:selectBooleanButton id="compilacion"
+							value="#{masterActionsController.selected.compilacion}"
+							onLabel="Si" offLabel="No" style="width:60px" />
+
+						<h:outputLabel value="Visualizacion" />
+						<p:selectBooleanButton id="visualizacion"
+							value="#{masterActionsController.selected.visualizacion}"
+							onLabel="Si" offLabel="No" style="width:60px" />
+
+						<h:outputLabel value="Prueba Web" />
+						<p:selectBooleanButton id="pruebaWeb"
+							value="#{masterActionsController.selected.pruebaWeb}"
+							onLabel="Si" offLabel="No" style="width:60px" />
+
+						<h:outputLabel value="Prueba Lote" />
+						<p:selectBooleanButton id="pruebaLote"
+							value="#{masterActionsController.selected.pruebaLote}"
+							onLabel="Si" offLabel="No" style="width:60px" />
+
+
+
 						<h:outputLabel
 							value="#{bundle.ListMasterActionsTitle_StateMaster}"
 							for="stateActions" />
 						<p:selectOneMenu id="stateActions"
 							value="#{masterActionsController.selected.stateActions}">
 							<f:selectItem itemLabel="N/A" itemValue="0" />
-							<f:selectItem itemLabel="GENERACION_CODIGO" itemValue="1" />
-							<f:selectItem itemLabel="DESARROLLO" itemValue="2" />
-							<f:selectItem itemLabel="ENTREGADO_PI" itemValue="3" />
-							<f:selectItem itemLabel="PRUEBAS_PI" itemValue="4" />
-							<f:selectItem itemLabel="ENTREGADO_DEMO" itemValue="5" />
-							<f:selectItem itemLabel="PRUEBAS_DEMO" itemValue="6" />
+							<f:selectItem itemLabel="SIN_ASIGNAR" itemValue="1" />
+							<f:selectItem itemLabel="EN_DESARROLLO" itemValue="2" />
+							<f:selectItem itemLabel="EN_PRUEBAS_UNITARIAS" itemValue="3" />
+							<f:selectItem itemLabel="EN_PRUEBAS_CALIDAD" itemValue="4" />
+							<f:selectItem itemLabel="EN_DEVOLUCION" itemValue="5" />
+							<f:selectItem itemLabel="PARA_CATALOGAR" itemValue="6" />
+							<f:selectItem itemLabel="MIGRADO" itemValue="7" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Complejidad" for="complejidad" />
+						<p:selectOneMenu id="complejidad"
+							value="#{masterActionsController.selected.complejidad}">
+							<f:selectItem itemLabel="N/A" itemValue="0" />
+							<f:selectItem itemLabel="BAJA" itemValue="1" />
+							<f:selectItem itemLabel="MEDIA" itemValue="2" />
+							<f:selectItem itemLabel="ALTA" itemValue="3" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="proveedor" for="proveedor" />
+						<p:selectOneMenu id="proveedor"
+							value="#{masterActionsController.selected.proveedor}">
+							<f:selectItem itemLabel="N/A" itemValue="0" />
+							<f:selectItem itemLabel="SST" itemValue="1" />
+							<f:selectItem itemLabel="STEFANINI" itemValue="2" />
+							<f:selectItem itemLabel="MICROFOCUS" itemValue="3" />
 						</p:selectOneMenu>
 
 

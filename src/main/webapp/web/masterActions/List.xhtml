@@ -19,11 +19,11 @@
 			</div>
 			<br />
 			<p:dataTable value="#{masterActionsController.listMasterActions}"
-				var="item" rows="30" id="dateTable" paginator="true"
+				var="item" rows="200" id="dateTable" paginator="true"
 				widgetVar="procesoTable"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="5,10,15,20,30" style="margin-bottom:20px"
-				rowStyleClass="#{item.finishActions eq false ? 'red' : null}">
+				rowsPerPageTemplate="5,10,15,20,30,50,100,200"
+				style="margin-bottom:5px">
 
 				<f:facet name="header">
 					<p:outputPanel style="float: right">
@@ -38,11 +38,16 @@
 					<h:commandLink>
 						<p:graphicImage library="Images" name="icon_logo_Excel.png" />
 						<p:dataExporter type="xls" target="dateTable"
-							fileName="Reporte_Procesos" />
+							fileName="Reporte_Migracion" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:graphicImage library="Images" name="pdf.png" />
+						<p:dataExporter type="pdf" target="dateTable"
+							fileName="Reporte_Migracion_pdf" />
 					</h:commandLink>
 				</f:facet>
 
-				<p:column style="width:20%;"
+				<p:column style="width:25%;"
 					filterBy="#{item.idStrategy.nameStrategy}"
 					filterMatchMode="contains" filterStyle="display: none">
 					<f:facet name="header">
@@ -52,16 +57,40 @@
 				</p:column>
 
 				<p:column filterBy="#{item.idStrategy.idEntity.nameEntity}"
-					filterMatchMode="contains" filterStyle="display: none">
+					filterMatchMode="contains" filterStyle="display: none"
+					style="width:17%;">
 					<f:facet name="header">
 						<h:outputText value="Entidad" />
 					</f:facet>
 					<h:outputText value="#{item.idStrategy.idEntity.nameEntity}" />
 				</p:column>
 
+				<p:column filterBy="#{item.complejidad}" filterMatchMode="contains"
+					filterStyle="display: none" style="width:17%;">
+					<f:facet name="header">
+						<h:outputText value="Complejidad" />
+					</f:facet>
+					<h:outputLabel value="N/A" rendered="#{item.complejidad == 0}" />
+					<h:outputLabel value="BAJA" rendered="#{item.complejidad == 1}" />
+					<h:outputLabel value="MEDIA" rendered="#{item.complejidad == 2}" />
+					<h:outputLabel value="ALTA" rendered="#{item.complejidad == 3}" />
+				</p:column>
+
+				<p:column filterBy="#{item.proveedor}" filterMatchMode="contains"
+					filterStyle="display: none" style="width:17%;">
+					<f:facet name="header">
+						<h:outputText value="Proveedor" />
+					</f:facet>
+					<h:outputLabel value="N/A" rendered="#{item.proveedor == 0}" />
+					<h:outputLabel value="STT" rendered="#{item.proveedor == 1}" />
+					<h:outputLabel value="STEFANINI" rendered="#{item.proveedor == 2}" />
+					<h:outputLabel value="MICROFOCUS" rendered="#{item.proveedor == 3}" />
+				</p:column>
+
 				<p:column
 					filterBy="#{item.userActions.nameUser} #{item.userActions.lastNameUser}"
-					filterMatchMode="contains" filterStyle="display: none">
+					filterMatchMode="contains" filterStyle="display: none"
+					style="width:12%;">
 					<f:facet name="header">
 						<h:outputText value="#{bundle.ListMasterActionsTitle_userActions}" />
 					</f:facet>
@@ -70,56 +99,68 @@
 				</p:column>
 
 				<p:column filterBy="#{item.stateActions}" filterMatchMode="contains"
-					filterStyle="display: none" style="width:20%;">
+					filterStyle="display: none" style="width:15%;">
 					<f:facet name="header">
 						<h:outputText value="#{bundle.ListMasterActionsTitle_StateMaster}" />
 					</f:facet>
 					<h:outputLabel value="N/A" rendered="#{item.stateActions == 0}" />
-					<h:outputLabel value="GENERACION_CODIGO"
+					<h:outputLabel value="SIN_ASIGNAR"
 						rendered="#{item.stateActions == 1}" />
-					<h:outputLabel value="DESARROLLO"
+					<h:outputLabel value="EN_DESARROLLO"
 						rendered="#{item.stateActions == 2}" />
-					<h:outputLabel value="ENTREGADO_PI"
+					<h:outputLabel value="EN_PRUEBAS_UNITARIAS"
 						rendered="#{item.stateActions == 3}" />
-					<h:outputLabel value="PRUEBAS_PI"
+					<h:outputLabel value="EN_PRUEBAS_CALIDAD"
 						rendered="#{item.stateActions == 4}" />
-					<h:outputLabel value="ENTREGADO_DEMO"
+					<h:outputLabel value="EN_DEVOLUCION"
 						rendered="#{item.stateActions == 5}" />
-					<h:outputLabel value="PRUEBAS_DEMO"
+					<h:outputLabel value="PARA_CATALOGAR"
 						rendered="#{item.stateActions == 6}" />
+					<h:outputLabel value="MIGRADO" rendered="#{item.stateActions == 7}" />
 				</p:column>
 
-
-				<p:column filterBy="#{item.finishActions}"
+				<p:column filterBy="#{item.visualizacion}"
 					filterMatchMode="contains" filterStyle="display: none"
 					style="width:10%;">
 					<f:facet name="header">
-						<h:outputText value="¿Terminado" />
+						<h:outputText value="Visualizacion" />
 					</f:facet>
-					<h:outputLabel value="Si" rendered="#{item.finishActions == true}" />
-					<h:outputLabel value="No" rendered="#{item.finishActions == false}" />
+					<h:outputLabel value="Si" rendered="#{item.visualizacion == true}" />
+					<h:outputLabel value="No" rendered="#{item.visualizacion == false}" />
 				</p:column>
 
-				<p:column filterBy="#{item.timeActions}" filterMatchMode="contains"
-					filterStyle="display: none">
+				<p:column filterBy="#{item.compilacion}" filterMatchMode="contains"
+					filterStyle="display: none" style="width:10%;">
 					<f:facet name="header">
-						<h:outputText value="#{bundle.ListMasterActionsTitle_timeActions}" />
+						<h:outputText value="Compilacion" />
 					</f:facet>
-					<h:outputText value="#{item.timeActions}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-					</h:outputText>
+					<h:outputLabel value="Si" rendered="#{item.compilacion == true}" />
+					<h:outputLabel value="No" rendered="#{item.compilacion == false}" />
 				</p:column>
 
-				<p:column exportable="false" style="width:15%;">
+				<p:column filterBy="#{item.pruebaWeb}" filterMatchMode="contains"
+					filterStyle="display: none" style="width:10%;">
+					<f:facet name="header">
+						<h:outputText value="Prueba Web" />
+					</f:facet>
+					<h:outputLabel value="Si" rendered="#{item.pruebaWeb == true}" />
+					<h:outputLabel value="No" rendered="#{item.pruebaWeb == false}" />
+				</p:column>
+
+				<p:column filterBy="#{item.pruebaLote}" filterMatchMode="contains"
+					filterStyle="display: none" style="width:10%;">
+					<f:facet name="header">
+						<h:outputText value="Prueba Lote" />
+					</f:facet>
+					<h:outputLabel value="Si" rendered="#{item.pruebaLote == true}" />
+					<h:outputLabel value="No" rendered="#{item.pruebaLote == false}" />
+				</p:column>
+
+				<p:column exportable="false" style="width:10%;">
 					<f:facet name="header">
 						<h:outputText value="&nbsp;" />
 					</f:facet>
-					<p:commandButton icon="ui-icon-search" ajax="false"
-						action="#{masterActionsController.prepareView}"
-						title="#{bundle.ListMasterActionsViewLink}">
-						<f:setPropertyActionListener
-							target="#{masterActionsController.current}" value="#{item}" />
-					</p:commandButton>
+
 					<h:outputText value=" " />
 					<p:commandButton icon="ui-icon-pencil" ajax="false"
 						action="#{masterActionsController.prepareEdit}"
